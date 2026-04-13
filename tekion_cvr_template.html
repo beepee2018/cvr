@@ -447,6 +447,89 @@
     margin-bottom: 7px;
   }
 
+  /* SUPPORT CONTEXT SECTION */
+  .support-section {
+    background: var(--bg-offwhite);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .support-header {
+    padding: 18px 22px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-white);
+  }
+  .support-header p {
+    font-size: 13.5px;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .support-col {
+    padding: 20px 22px;
+  }
+  .support-col:first-child {
+    border-right: 1px solid var(--border);
+  }
+  .support-col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .support-col:first-child .support-col-label { color: #b5651d; }
+  .support-col:last-child .support-col-label { color: var(--teal-dk); }
+
+  .support-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text-body);
+    align-items: flex-start;
+  }
+  .support-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .dot-amber { background: #e8a045; }
+  .dot-teal  { background: var(--teal-dk); }
+
+  .support-threshold {
+    margin-top: 0;
+    border-top: 1px solid var(--border);
+    padding: 16px 22px;
+    background: #fdf8f3;
+  }
+  .threshold-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #b5651d;
+    margin-bottom: 10px;
+  }
+  .threshold-row {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.6;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .threshold-row:last-child { margin-bottom: 0; }
+  .threshold-icon { flex-shrink: 0; font-size: 13px; margin-top: 1px; }
+
   footer {
     background: var(--bg-offwhite);
     border-top: 1px solid var(--border);
@@ -677,6 +760,47 @@
       <div class="stat-card">
         <div class="stat-num">48<span>h</span></div>
         <div class="stat-label">CVR summary delivery<br>to dealer after meeting</div>
+      </div>
+    </div>
+
+    <h2>When Support Issues Are in the Room</h2>
+
+    <div class="support-section">
+      <div class="support-header">
+        <p>Unresolved support tickets don't cancel the CVR — but ignoring them will. Dealers who are sitting on open issues will spend the entire value conversation thinking about them. The CVM's job is to acknowledge the support reality first, briefly and with ownership, before the value conversation begins. This clears the air and earns the right to move forward.</p>
+      </div>
+
+      <div class="support-grid">
+        <div class="support-col">
+          <div class="support-col-label">What not to do</div>
+          <div class="support-row"><div class="support-dot dot-amber"></div><span>Walk in and proceed as if open tickets don't exist — dealers notice the avoidance immediately.</span></div>
+          <div class="support-row"><div class="support-dot dot-amber"></div><span>Spend the CVR time on support triage — that's a different conversation with a different owner.</span></div>
+          <div class="support-row"><div class="support-dot dot-amber"></div><span>Make promises in the CVR that require support resolution to deliver — this creates compounding credibility risk.</span></div>
+          <div class="support-row"><div class="support-dot dot-amber"></div><span>Let a stack of tickets reframe the entire account narrative — one bad period is not the full picture.</span></div>
+        </div>
+        <div class="support-col">
+          <div class="support-col-label">What the CVM does instead</div>
+          <div class="support-row"><div class="support-dot dot-teal"></div><span>Open Block 01 with a brief, direct acknowledgment — name the open items, state the owner, state the timeline. Five minutes maximum.</span></div>
+          <div class="support-row"><div class="support-dot dot-teal"></div><span>Separate support accountability from value accountability — the CVM owns the relationship and escalation path, not the resolution itself.</span></div>
+          <div class="support-row"><div class="support-dot dot-teal"></div><span>Use the CVP to show context — if a dealer is behind on adoption due to an unresolved issue, name that explicitly. Data without context is unfair.</span></div>
+          <div class="support-row"><div class="support-dot dot-teal"></div><span>Document the open items in the CVR summary and assign a committed resolution date — this creates accountability without derailing the meeting.</span></div>
+        </div>
+      </div>
+
+      <div class="support-threshold">
+        <div class="threshold-label">When to pause the CVR — escalation threshold</div>
+        <div class="threshold-row">
+          <span class="threshold-icon">⚠</span>
+          <span><strong>A routine CVR proceeds</strong> when tickets are open but not blocking core operations. Acknowledge, assign, move on. The value conversation is still valid and necessary.</span>
+        </div>
+        <div class="threshold-row">
+          <span class="threshold-icon">✕</span>
+          <span><strong>Shift to a recovery conversation</strong> when a dealer has a broken core workflow, is in active escalation, or has explicitly said they are not ready for a business review. A standard CVR in this state signals Tekion is not listening. Reschedule once stability is restored — and document the decision in the CVP.</span>
+        </div>
+        <div class="threshold-row">
+          <span class="threshold-icon">→</span>
+          <span><strong>Manager call:</strong> The threshold between "proceed with acknowledgment" and "pause and recover" is a judgment call that managers and CVMs should calibrate together. This becomes a coaching conversation in Phase 2 enablement — not left to individual CVM discretion in the field.</span>
+        </div>
       </div>
     </div>
 
