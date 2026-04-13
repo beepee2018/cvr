@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Value Review — Tekion Corp.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --teal:          #04DEBB;
+    --teal-dk:       #02b89e;
+    --teal-lt:       rgba(4,222,187,0.10);
+    --teal-border:   rgba(4,222,187,0.30);
+
+    --bg-page:       #f0f0ed;
+    --bg-white:      #ffffff;
+    --bg-offwhite:   #f7f7f5;
+    --bg-rule:       #e8e8e4;
+
+    --text-primary:  #111111;
+    --text-body:     #333333;
+    --text-muted:    #777777;
+    --text-faint:    #aaaaaa;
+
+    --border:        #e0e0db;
+    --border-md:     #cccccc;
+
+    --cover-bg:      #111111;
+
+    --cvm-color:     #02968a;
+    --cvm-bg:        rgba(2,150,138,0.07);
+    --cvm-border:    rgba(2,150,138,0.22);
+
+    --cva-color:     #1a62b5;
+    --cva-bg:        rgba(26,98,181,0.07);
+    --cva-border:    rgba(26,98,181,0.20);
+
+    --shared-color:  #6344b5;
+    --shared-bg:     rgba(99,68,181,0.07);
+    --shared-border: rgba(99,68,181,0.20);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Instrument Sans', Calibri, sans-serif;
+    background: var(--bg-page);
+    color: var(--text-body);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 40px auto;
+    background: var(--bg-white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--cover-bg);
+    padding: 52px 60px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle at bottom right, rgba(4,222,187,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .cover-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+    opacity: 0.85;
+  }
+  .cover h1 {
+    font-family: 'Syne', Georgia, sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .cover-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 32px;
+  }
+  .cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    padding-top: 22px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.42);
+  }
+  .cover-meta span strong {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* BODY */
+  .body { padding: 48px 60px 60px; }
+
+  .purpose-note {
+    background: var(--teal-lt);
+    border-left: 3px solid var(--teal-dk);
+    padding: 18px 22px;
+    margin-bottom: 44px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+
+  .body > h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 16px;
+    margin-top: 48px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* DISTINCTION TABLE */
+  .distinction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .dist-col-header {
+    padding: 13px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .dist-col:first-child .dist-col-header {
+    background: var(--bg-offwhite);
+    color: var(--text-muted);
+    border-right: 1px solid var(--border);
+  }
+  .dist-col:last-child .dist-col-header {
+    background: var(--teal-lt);
+    color: var(--teal-dk);
+  }
+  .dist-cell {
+    padding: 12px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.55;
+  }
+  .dist-cell:nth-child(odd) {
+    background: var(--bg-white);
+    color: var(--text-muted);
+    border-right: 1px solid var(--border);
+  }
+  .dist-cell:nth-child(even) {
+    background: var(--bg-offwhite);
+    color: var(--text-body);
+  }
+  .dist-cell:last-child, .dist-cell:nth-last-child(2) { border-bottom: none; }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .legend-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-right: 4px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+  /* AGENDA */
+  .agenda { display: flex; flex-direction: column; gap: 10px; }
+
+  .agenda-block {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background: var(--bg-offwhite);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .block-header:hover { background: #ededea; }
+  .block-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    min-width: 22px;
+  }
+  .block-title { flex: 1; font-weight: 600; font-size: 14px; color: var(--text-primary); }
+  .block-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  .owner-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    border-width: 1px;
+    border-style: solid;
+  }
+  .chevron { font-size: 10px; color: var(--text-faint); transition: transform 0.2s; }
+  .agenda-block.open .chevron { transform: rotate(90deg); }
+
+  .block-body {
+    display: none;
+    padding: 22px 24px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-white);
+  }
+  .agenda-block.open .block-body { display: block; }
+
+  .block-purpose {
+    font-size: 13.5px;
+    color: var(--text-body);
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+  .talking-points { display: flex; flex-direction: column; gap: 9px; }
+  .tp { display: flex; gap: 12px; font-size: 13px; color: var(--text-body); line-height: 1.6; }
+  .tp-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-dk); flex-shrink: 0; margin-top: 8px; }
+
+  .cva-note {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--cva-bg);
+    border-left: 2px solid var(--cva-color);
+    border-radius: 0 6px 6px 0;
+    font-size: 12.5px;
+    color: var(--cva-color);
+    line-height: 1.65;
+  }
+  .cva-note strong {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+    opacity: 0.75;
+  }
+  .phase-note {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--teal-lt);
+    border-left: 2px solid var(--teal-dk);
+    border-radius: 0 6px 6px 0;
+    font-size: 12.5px;
+    color: var(--teal-dk);
+    line-height: 1.65;
+  }
+  .phase-note strong {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+    opacity: 0.75;
+  }
+
+  /* TIER TABLE */
+  .tier-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .tier-table thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 11px 16px;
+    text-align: left;
+    background: var(--bg-offwhite);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .tier-table tbody td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text-body);
+    line-height: 1.55;
+  }
+  .tier-table tbody tr:last-child td { border-bottom: none; }
+  .tier-table tbody tr:hover td { background: var(--bg-offwhite); }
+
+  .tier-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+  }
+  .tier-1 { background: rgba(2,150,138,0.08); color: #02968a; border-color: rgba(2,150,138,0.25); }
+  .tier-2 { background: rgba(26,98,181,0.08); color: #1a62b5; border-color: rgba(26,98,181,0.22); }
+  .tier-3 { background: rgba(99,68,181,0.08); color: #6344b5; border-color: rgba(99,68,181,0.20); }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    background: var(--bg-offwhite);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 20px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-num span { color: var(--teal-dk); }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* MANAGER BLOCKS */
+  .manager-block {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .manager-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background: var(--bg-offwhite);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .manager-header:hover { background: #ededea; }
+  .manager-arrow { font-size: 14px; color: var(--teal-dk); font-weight: 700; min-width: 18px; }
+  .manager-title { flex: 1; font-weight: 600; font-size: 13.5px; color: var(--text-primary); }
+  .chevron2 { font-size: 10px; color: var(--text-faint); transition: transform 0.2s; }
+  .manager-block.open .chevron2 { transform: rotate(90deg); }
+  .manager-body {
+    display: none;
+    padding: 18px 22px 20px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-white);
+    font-size: 13.5px;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+  .manager-block.open .manager-body { display: block; }
+
+  /* DIAGNOSTIC NOTE */
+  .diagnostic-note {
+    background: var(--bg-offwhite);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-top: 36px;
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+  .note-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--teal-dk);
+    margin-bottom: 7px;
+  }
+
+  footer {
+    background: var(--bg-offwhite);
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 18px;
+  }
+  footer strong { color: var(--teal-dk); }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; border-radius: 0; border: none; }
+    .block-body, .manager-body { display: block !important; }
+    .chevron, .chevron2 { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="cover">
+    <div class="cover-eyebrow">BP Learning Solutions &nbsp;·&nbsp; Tekion Corp. Engagement</div>
+    <h1>Customer Value Review</h1>
+    <div class="cover-sub">Framework Reference &nbsp;·&nbsp; Replacing the QBR Model</div>
+    <div class="cover-meta">
+      <span><strong>Version</strong>Phase 1 — April 2026</span>
+      <span><strong>Facilitator</strong>Customer Value Manager (CVM)</span>
+      <span><strong>Supporting role</strong>Customer Value Architect (CVA)</span>
+      <span><strong>Audience</strong>Dealer leadership — tier-calibrated</span>
+      <span><strong>Cadence</strong>Quarterly anchor; triggered by maturity events</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="purpose-note">
+      The Customer Value Review is a structured, outcome-focused conversation between Tekion and dealer leadership. It replaces the traditional QBR format with a meeting designed around what the dealer is trying to achieve — not what Tekion wants to show. The CVM facilitates. The CVA contributes data. The dealer leaves with documented progress, visible gaps, and a clear next chapter.
+    </div>
+
+    <h2>From QBR to Customer Value Review</h2>
+
+    <div class="distinction-grid">
+      <div class="dist-col">
+        <div class="dist-col-header">QBR model</div>
+      </div>
+      <div class="dist-col">
+        <div class="dist-col-header">Customer Value Review</div>
+      </div>
+      <div class="dist-cell">Vendor-led agenda, often feature-heavy</div>
+      <div class="dist-cell">Dealer goal-led agenda, grounded in the Customer Value Plan</div>
+      <div class="dist-cell">Quarterly slide deck, same format for all accounts</div>
+      <div class="dist-cell">Tiered conversation — depth and participants calibrated to maturity</div>
+      <div class="dist-cell">Usage stats as the headline metric</div>
+      <div class="dist-cell">Business outcomes as the headline — adoption data in support</div>
+      <div class="dist-cell">Renewal conversation often awkward or forced</div>
+      <div class="dist-cell">Renewal readiness emerges naturally from documented value</div>
+      <div class="dist-cell">Prepared by the CSM, presented to the client</div>
+      <div class="dist-cell">Co-prepared by CVM and CVA; dealer contributes their own goals</div>
+      <div class="dist-cell">Inconsistent cadence, often skipped</div>
+      <div class="dist-cell">Anchored quarterly, triggered by maturity milestones</div>
+    </div>
+
+    <h2>Who's in the Room — Maturity-Calibrated Participation</h2>
+
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">The CVR is not the same meeting for every dealer. Participant mix, conversation depth, and format adapt based on where the dealer sits in the Dealer Maturity Model.</p>
+
+    <table class="tier-table">
+      <thead>
+        <tr>
+          <th>Maturity tier</th>
+          <th>Dealer participants</th>
+          <th>CVR focus</th>
+          <th>Format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tier-badge tier-1">Tier 1 — Foundational</span></td>
+          <td>GM or Ops lead; department heads as needed</td>
+          <td>Adoption progress, foundational workflows, quick wins surfaced by CVA</td>
+          <td>60–75 min; CVM-led with CVA data summary</td>
+        </tr>
+        <tr>
+          <td><span class="tier-badge tier-2">Tier 2 — Operational</span></td>
+          <td>GM and 1–2 department leads</td>
+          <td>Module performance vs. benchmarks; value realized to date; next maturity milestone</td>
+          <td>75–90 min; CVM-led, CVA presents adoption narrative</td>
+        </tr>
+        <tr>
+          <td><span class="tier-badge tier-3">Tier 3 — Strategic</span></td>
+          <td>Dealer principal and/or GM; sometimes ownership group</td>
+          <td>Business outcomes realized; Tekion as competitive advantage; expansion and growth</td>
+          <td>90 min; executive-to-executive; CVM owns full conversation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="legend" style="margin-top:32px;">
+      <span class="legend-label">Ownership</span>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cvm-color);"></div>CVM — facilitates and owns the conversation</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cva-color);"></div>CVA — prepares and contributes adoption data</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--shared-color);"></div>Shared — both roles contribute</div>
+    </div>
+
+    <h2>Meeting Structure — Five-Block Agenda</h2>
+
+    <div class="agenda">
+
+      <div class="agenda-block open">
+        <div class="block-header" onclick="toggle(this)">
+          <span class="block-num">01</span>
+          <span class="block-title">Dealer Goals &amp; Context Reset</span>
+          <span class="owner-badge" style="background:var(--cvm-bg);color:var(--cvm-color);border-color:var(--cvm-border);">CVM</span>
+          <span class="block-time">10 min</span>
+          <span class="chevron">&#9658;</span>
+        </div>
+        <div class="block-body">
+          <p class="block-purpose">Open with the dealer's world — not Tekion's. This block reanchors the conversation to what the dealer said mattered in the Customer Value Plan and surfaces anything that has changed.</p>
+          <div class="talking-points">
+            <div class="tp"><div class="tp-dot"></div><span>Confirm or update stated dealer priorities from the CVP — what are they trying to achieve this quarter?</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Acknowledge any operational changes since the last touchpoint — staffing, volume, market shifts.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Surface anything from the Check-In history that warrants deeper discussion today.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Confirm the success criteria the dealer will use to measure this period — in their words, not Tekion's.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-block">
+        <div class="block-header" onclick="toggle(this)">
+          <span class="block-num">02</span>
+          <span class="block-title">Platform Performance &amp; Adoption Narrative</span>
+          <span class="owner-badge" style="background:var(--cva-bg);color:var(--cva-color);border-color:var(--cva-border);">CVA-led</span>
+          <span class="block-time">20 min</span>
+          <span class="chevron">&#9658;</span>
+        </div>
+        <div class="block-body">
+          <p class="block-purpose">The CVA presents adoption data not as a scorecard — but as a story about where the dealer is gaining traction, where gaps remain, and what those gaps cost them. Data leads to action, not defense.</p>
+          <div class="talking-points">
+            <div class="tp"><div class="tp-dot"></div><span>Module utilization by department — what is being used fully, partially, or not at all.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Maturity tier assessment against benchmarks — where does this dealer rank within their cohort?</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Named workflows with high impact that remain underutilized — the "leaving value on the table" conversation.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>User engagement signals — power users, adoption laggards, training needs.</span></div>
+          </div>
+          <div class="cva-note">
+            <strong>CVA prep requirement</strong>
+            This block requires CVA preparation before the meeting: pull current adoption data, identify 2–3 specific high-value gaps, and build the narrative connecting those gaps to the dealer's stated goals from Block 01. Do not present raw numbers — present a story.
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-block">
+        <div class="block-header" onclick="toggle(this)">
+          <span class="block-num">03</span>
+          <span class="block-title">Value Realized — Progress Against Goals</span>
+          <span class="owner-badge" style="background:var(--shared-bg);color:var(--shared-color);border-color:var(--shared-border);">CVM + CVA</span>
+          <span class="block-time">20 min</span>
+          <span class="chevron">&#9658;</span>
+        </div>
+        <div class="block-body">
+          <p class="block-purpose">Connect platform data to business outcomes in language the dealer owns. This is the core of why the CVR replaces the QBR — it demonstrates value, not activity. The CVM drives the conversation; the CVA supports with evidence.</p>
+          <div class="talking-points">
+            <div class="tp"><div class="tp-dot"></div><span>Review documented success criteria from the CVP — what was the dealer trying to achieve, and what is the evidence of movement?</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Where value is clear, make it explicit and documented — this becomes the renewal evidence base.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Where value is unclear or lagging, name the gap honestly — then connect it to a specific action.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Dealer maturity progression — has the account moved within the Dealer Maturity Model this period?</span></div>
+          </div>
+          <div class="phase-note">
+            <strong>Phase 1 note</strong>
+            In early deployment, documented value evidence may be limited. If the dealer is pre-maturity-baseline, use this block to establish the starting point — the benchmark against which next quarter's CVR will measure progress. A defined starting line is itself a valuable output.
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-block">
+        <div class="block-header" onclick="toggle(this)">
+          <span class="block-num">04</span>
+          <span class="block-title">Next Quarter — Joint Priorities &amp; Commitments</span>
+          <span class="owner-badge" style="background:var(--cvm-bg);color:var(--cvm-color);border-color:var(--cvm-border);">CVM</span>
+          <span class="block-time">15 min</span>
+          <span class="chevron">&#9658;</span>
+        </div>
+        <div class="block-body">
+          <p class="block-purpose">The CVR must produce tangible next steps — not a list of follow-ups that disappear into email. This block turns the conversation into a commitment from both sides. The dealer owns some of it. Tekion owns the rest.</p>
+          <div class="talking-points">
+            <div class="tp"><div class="tp-dot"></div><span>2–3 specific Tekion commitments for the next quarter — what will the CVM and CVA do, and by when?</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>1–2 dealer-side actions — adoption behaviors, workflow activations, internal change management steps they agreed to own.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Next maturity milestone — what does "progress" look like in 90 days? Define it explicitly so the next CVR has a clear measuring stick.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Confirm any CVA engagement needed between now and next CVR — training, adoption sprints, diagnostic follow-ups.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-block">
+        <div class="block-header" onclick="toggle(this)">
+          <span class="block-num">05</span>
+          <span class="block-title">Relationship &amp; Forward Look</span>
+          <span class="owner-badge" style="background:var(--cvm-bg);color:var(--cvm-color);border-color:var(--cvm-border);">CVM</span>
+          <span class="block-time">10 min</span>
+          <span class="chevron">&#9658;</span>
+        </div>
+        <div class="block-body">
+          <p class="block-purpose">Close the CVR with the dealer feeling heard and the CVM with a clear read on relationship health. This is also the natural entry point for expansion conversations at Tier 3 accounts where the relationship is strong enough to support it.</p>
+          <div class="talking-points">
+            <div class="tp"><div class="tp-dot"></div><span>Open question: What would make the next 90 days a clear win for you and your team?</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>Any concerns or risks the dealer wants to name — surface them before they escalate.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>For Tier 3 accounts: natural bridge to expansion or growth conversation if relationship and value evidence support it.</span></div>
+            <div class="tp"><div class="tp-dot"></div><span>CVM confirms CVR summary will be shared within 48 hours — dealer has a record, not just memories.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>By the Numbers — What Good Looks Like</h2>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">75<span>%+</span></div>
+        <div class="stat-label">CVR completion rate<br>target by Q2</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">90<span>d</span></div>
+        <div class="stat-label">Standard anchor cadence<br>per account</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">48<span>h</span></div>
+        <div class="stat-label">CVR summary delivery<br>to dealer after meeting</div>
+      </div>
+    </div>
+
+    <h2>What This Means for Managers</h2>
+
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">The CVR creates new accountability infrastructure for the CS leadership team. Managers will need to:</p>
+
+    <div class="manager-block open">
+      <div class="manager-header" onclick="toggleManager(this)">
+        <span class="manager-arrow">→</span>
+        <span class="manager-title">Inspect CVR readiness before each meeting</span>
+        <span class="chevron2">&#9658;</span>
+      </div>
+      <div class="manager-body">
+        Review the CVM's CVP before the CVR is delivered. Is the dealer's goal context current? Does the CVA have adoption data ready? Has the prior quarter's commitment progress been logged? The CVP is the pre-meeting brief — not an optional document.
+      </div>
+    </div>
+
+    <div class="manager-block">
+      <div class="manager-header" onclick="toggleManager(this)">
+        <span class="manager-arrow">→</span>
+        <span class="manager-title">Review CVR summaries as a portfolio health signal</span>
+        <span class="chevron2">&#9658;</span>
+      </div>
+      <div class="manager-body">
+        The 48-hour CVR summary becomes a management data point — not a dealer communication. Patterns across summaries will surface which accounts are advancing, which are stalling, and where CVM or CVA coaching is needed. This replaces anecdotal pipeline conversations with documented evidence.
+      </div>
+    </div>
+
+    <div class="manager-block">
+      <div class="manager-header" onclick="toggleManager(this)">
+        <span class="manager-arrow">→</span>
+        <span class="manager-title">Attend selectively — with purpose, not as oversight</span>
+        <span class="chevron2">&#9658;</span>
+      </div>
+      <div class="manager-body">
+        Manager presence in a CVR should be a signal — not a default. Attend Tier 3 strategic accounts to reinforce executive relationship. Attend high-risk accounts to demonstrate commitment. Avoid attending routine Tier 1 CVRs unless the CVM needs development support — it dilutes the CVM's ownership and the dealer's experience.
+      </div>
+    </div>
+
+    <div class="diagnostic-note">
+      <div class="note-label">Phase 1 context for this artifact</div>
+      This framework introduces the Customer Value Review concept to leadership and defines the standard. The working CVM template — with structured pre-meeting checklist, CVA data brief, and post-meeting summary format — will be developed in Phase 2 alongside CVM enablement. The goal here is alignment on what the CVR is, why it replaces the QBR, and what leadership will need to do to make it operational.
+    </div>
+
+  </div>
+
+  <footer>
+    <strong>BP Learning Solutions</strong> &nbsp;·&nbsp; bp-learningsolutions.com &nbsp;·&nbsp; Tekion Corp. Engagement &nbsp;·&nbsp; Phase 1 — April 2026
+  </footer>
+
+</div>
+
+<script>
+  function toggle(header) { header.closest('.agenda-block').classList.toggle('open'); }
+  function toggleManager(header) { header.closest('.manager-block').classList.toggle('open'); }
+</script>
+</body>
+</html>
